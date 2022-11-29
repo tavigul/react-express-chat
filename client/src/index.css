@@ -23,3 +23,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.register,
+.login {
+  background-color: #282e33;
+}
+
+.form {
+  width: 300px;
+}
+
+input {
+  background-color: transparent !important;
+  color: white;
+}
+
+.button {
+  background-color: #8773af;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 0.8rem 2rem;
+}
+
+.register-link {
+  color: #8773af;
+  font-size: 0.9rem;
+}
