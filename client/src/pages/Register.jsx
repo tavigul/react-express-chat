@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import axios from 'axios';
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {registerRoute} from "../utils/APIroutes";
+import { registerRoute } from "../utils/APIroutes";
 
 function Register() {
+  const navigate = useNavigate();
   const toastOptions = {
     position: "bottom-right",
     autoClose: 8000,
@@ -14,10 +15,10 @@ function Register() {
     theme: "dark",
   };
   const [values, setValues] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    username: "justrecentrycreatedname",
+    email: "menashetav@gmail.com",
+    password: "12345678",
+    confirmPassword: "12345678",
   });
 
   const handleChange = (event) => {
@@ -56,10 +57,21 @@ function Register() {
     event.preventDefault();
 
     if (handleValidation()) {
+      console.log("in validation");
       const { username, email, password } = values;
       const { data } = await axios.post(registerRoute, {
-        username, email, password
-      })
+        username,
+        email,
+        password,
+      });
+
+      if (!data.status) {
+        toast.error(data.msg, toastOptions);
+      }
+      if (data.status) {
+        localStorage.setItem("chat-app-user", JSON.stringify(data.user));
+        navigate("/");
+      }
     }
   };
   return (
@@ -72,7 +84,7 @@ function Register() {
           }}
         >
           <div className="flex flex-col items-center justify-center">
-            <h1 class="text-center text-xl text-slate-50	">Sign up form</h1>
+            <h1 className="text-center text-xl text-slate-50	">Sign up form</h1>
           </div>
 
           <input
@@ -80,6 +92,7 @@ function Register() {
             className="my-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             placeholder="Username"
             name="username"
+            value="helloworld"
             onChange={(e) => handleChange(e)}
           />
           <input
@@ -87,6 +100,7 @@ function Register() {
             className="my-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             placeholder="Email"
             name="email"
+            value="menashelellel34@gmail.com"
             onChange={(e) => handleChange(e)}
           />
           <input
@@ -94,6 +108,7 @@ function Register() {
             className="my-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             placeholder="Enter a password"
             name="password"
+            value="12345678"
             onChange={(e) => handleChange(e)}
           />
           <input
@@ -101,6 +116,7 @@ function Register() {
             className="my-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             placeholder="Confirm password"
             name="confirmPassword"
+            value="12345678"
             onChange={(e) => handleChange(e)}
           />
 
