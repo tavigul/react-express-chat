@@ -57,7 +57,6 @@ function Register() {
     event.preventDefault();
 
     if (handleValidation()) {
-      console.log("in validation");
       const { username, email, password } = values;
       const { data } = await axios.post(registerRoute, {
         username,
@@ -123,7 +122,7 @@ function Register() {
           <button className="button" type="submit">
             Register
           </button>
-          <span className="register-link my-2  text-center">
+          <span className="auth-link my-2 text-center">
             Already have an account? <Link to="/login">login</Link>
           </span>
         </form>
